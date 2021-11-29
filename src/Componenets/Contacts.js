@@ -1,21 +1,17 @@
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
-import { Box, Button, Container, Grid, Typography} from '@mui/material';
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import './style.css'
-// {/* <JotformEmbed src="https://form.jotform.com/213314923365049" /> */}
 import TextField from '@mui/material/TextField';
-
-const ContactForm = () => {
+const Contacts = () => {
     const [state, handleSubmit] = useForm("mbjwrkvj");
     if (state.succeeded) {
         return <p>Thanks for joining!</p>;
     }
     return (
-
-
-        <Container id='fom'  sx={{ bgcolor: 'white', borderRadius: '5px', my: 20 }} component="main" >
-            <Grid  container sx={{ flexDirection: 'row',alignItems: 'center', justifyContent: 'space-around'}}>
-                <Grid  item mt={2} >
+        <Container sx={{ bgcolor: 'white', borderRadius: '5px', my: 20 }} >
+            <Grid  container sx={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+                <Grid item mt={2} >
                     <Typography variant='h4' fontWeight={900} color={'#353353'}>Contact With me</Typography>
                 </Grid>
                 <Grid item
@@ -82,8 +78,7 @@ const ContactForm = () => {
             </Grid>
         </Container>
 
-
     );
 };
 
-export default ContactForm;
+export default Contacts;

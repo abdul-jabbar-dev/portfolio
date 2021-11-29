@@ -1,6 +1,5 @@
 import { Container, Grid, Typography } from '@mui/material';
 import React from 'react';
-import ContactForm from './ContactForm';
 import './Projects.css'
 const Projects = () => {
     return (
@@ -45,7 +44,7 @@ const Projects = () => {
                     </div>
                 </Grid>
             </Grid>
-            <ContactForm></ContactForm>
+            
         </Container>
     );
 };
