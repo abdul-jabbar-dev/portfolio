@@ -1,0 +1,84 @@
+#VolumeBar>*, #VolumeBar1>*, #VolumeBar2>* {
+    border-radius: 5px;
+}
+
+#VolumeBar, #VolumeBar1, #VolumeBar2 {
+    border-radius: 5px;
+    height: 10px;
+
+}
+
+#VolumeBar2>* {
+    background-color: #FF4C60;
+
+}
+
+.scrollContainer {
+    position: absolute;
+    bottom: 30px;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 300px;
+
+}
+
+.hover:hover {
+    transform: scale(1.5);
+    transition: all .2s ease-in;
+    opacity: 1;
+    filter: grayscale(0);
+}
+
+.hover {
+    opacity: .7;
+    filter: grayscale(1);
+}
+
+.div {
+    justify-content: space-evenly;
+    display: flex;
+
+}
+
+.mouse {
+    width: 15px;
+    height: 30px;
+    border: 3px solid rgba(252, 250, 250, 0.379);
+    border-radius: 15px;
+    position: relative;
+
+}
+
+.mouse::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+
+    transform: translateX(-50%);
+    background-color: rgba(252, 248, 248, 0.379);
+    border-radius: 50%;
+    opacity: 1;
+    animation: wheel 1.5s infinite;
+}
+
+@keyframes wheel {
+    to {
+        opacity: 0;
+        top: 20px;
+
+    }
+}
+
+@media only screen and (max-height: 650px) {
+    .scrollContainer {
+        display: none;
+
+    }
+}
