@@ -21,13 +21,11 @@ const About = () => {
             clearInterval(timer);
         };
     }, []);
-    const contactClick = () => {
-        // window.location.hash('#fom')
-    }
+
     return (
-        <Box height={'100vh'} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} alignContent={'center'} my={5}>
+        <Box height={'100vh'} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} alignContent={'center'} mt={5}>
             <Box width={'100%'}>
-                <Typography fontWeight={700} variant='h4'>About Me</Typography>
+                <Typography fontWeight={700} variant='h4'>Short summary</Typography>
                 <br /><br />
                 <Container >
                     <Box borderRadius={'20px'} bgcolor={'#302F4E'}>
@@ -65,8 +63,8 @@ const About = () => {
                             </Grid >
                             <Grid px={5} xs={12} md={6} item>
                                 <Typography fontWeight={200} variant='body1'>I am Abdul jabbar, web developer from Dhaka, Bangladesh. I have rich Skills in web site design and building and customization, also I am good at React.</Typography><br />
-
-                                <Button className='btn' color='secondary' onClick={contactClick} variant='secondary' sx={{ borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} >Contact me</Button>
+                                <a style={{ color: 'white' }} href='#fom'><Button className='btn' color='secondary' variant='secondary' sx={{ borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} >Contact me</Button>
+                                </a>
                             </Grid>
                         </Grid>
                     </Box>

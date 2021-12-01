@@ -1,15 +1,38 @@
-#VolumeBar>*, #VolumeBar1>*, #VolumeBar2>* {
+#VolumeBar>*, #VolumeBar1>*, #VolumeBar2>*, #VolumeBar3>*, #VolumeBar4>*, #VolumeBar5>* {
     border-radius: 5px;
 }
 
-#VolumeBar, #VolumeBar1, #VolumeBar2 {
+
+.hoverEffect:hover {
+    position: relative;
+    z-index: 9999999999999;
+    transform: scale(1.3);
+}
+
+
+
+#VolumeBar, #VolumeBar1, #VolumeBar2, #VolumeBar3, #VolumeBar4, #VolumeBar5 {
     border-radius: 5px;
     height: 10px;
-
 }
 
 #VolumeBar2>* {
     background-color: #FF4C60;
+
+}
+
+#VolumeBar3>* {
+    background-color: #ffea4c;
+
+}
+
+#VolumeBar4>* {
+    background-color: #01d67a;
+
+}
+
+#VolumeBar5>* {
+    background-color: #0091ab;
 
 }
 
@@ -62,8 +85,9 @@
     left: 50%;
 
     transform: translateX(-50%);
-    background-color: rgba(252, 248, 248, 0.379);
+    background-color: rgba(252, 252, 252, 0.89);
     border-radius: 50%;
+
     opacity: 1;
     animation: wheel 1.5s infinite;
 }
@@ -81,4 +105,11 @@
         display: none;
 
     }
+}
+
+.d {
+    top: 28px;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
 }

@@ -26,7 +26,7 @@ const Developer = () => {
                     sx={{ width: 150, height: 150, }}
                 />
                 <Box textAlign={'center'}>
-                    <Typography fontWeight={'bold'} variant='h3'>Abdul jabbar</Typography>
+                    <Typography fontWeight={'bold'} variant='h3'sx={{textTransform:'uppercase',letterSpacing:'6px'}} >Abdul jabbar</Typography>
                     <br />
                     <TextMotion></TextMotion><br />
                     <Box mx={'auto'} sx={{
@@ -35,7 +35,6 @@ const Developer = () => {
                         justifyContent: 'space-evenly',
                     }}>
                         <Stack direction="row" spacing={1}>
-
                             <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
                                 <FacebookOutlinedIcon htmlColor='white' />
                             </IconButton>
@@ -54,12 +53,12 @@ const Developer = () => {
                         </Stack>
 
                     </Box><br /><br />
-                    <Button className='btn' color='secondary' variant='secondary' sx={{ borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} startIcon={<ArrowCircleDownIcon />} onClick={onDownload}>Download cv</Button>
+                    <Button className='btn' color='secondary' variant='secondary' sx={{ letterSpacing:'3px',borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} startIcon={<ArrowCircleDownIcon />} onClick={onDownload}>Download cv</Button>
                 </Box>
             </Box>
-            <div class="scrollContainer">
-                <div class="field">
-                    <div class="mouse"></div>
+            <div className="scrollContainer">
+                <div className="field">
+                    <div className="mouse"></div>
 
                 </div>
             </div>
