@@ -12,7 +12,7 @@ const Developer = () => {
     const onDownload = () => {
         const link = document.createElement("a");
         link.download = `download.txt`;
-        link.href = "https://drive.google.com/u/2/uc?id=18Zegu6aCHvo1Cp9G5olgH63qElKqgo1D&export=download";
+        link.href = "https://drive.google.com/u/2/uc?id=1BkobdN6Po1dKR6FGARzhszyVZIZ8qG_i&export=download";
         link.click();
     };
 
