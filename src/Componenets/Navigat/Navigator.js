@@ -27,7 +27,7 @@ const Navigator = () => {
                 <Tooltip title="Home"><NavLink to={'/home'}> <BottomNavigationAction sx={{ color: '#fff' }} icon={<HomeIcon />} /> </NavLink></Tooltip>
                 <Tooltip title="Project"><NavLink to={'/projects'}> <BottomNavigationAction sx={{ color: '#fff' }} icon={<TimelineIcon />} /></NavLink></Tooltip>
                 <Tooltip title="About me"><NavLink to={'/aboutme'}> <BottomNavigationAction sx={{ color: '#fff' }} icon={<LocalLibraryIcon />} /></NavLink></Tooltip>
-                <Tooltip title="Blogs"><NavLink to={'/blogs'}>  <BottomNavigationAction sx={{ color: '#fff' }} icon={<NewspaperIcon />} /></NavLink></Tooltip>
+                {/* <Tooltip  title="Blogs"><NavLink to={'/blogs'}>  <BottomNavigationAction sx={{ color: '#fff' }} icon={<NewspaperIcon />} /></NavLink></Tooltip> */}
 
             </BottomNavigation>
         </Box>
