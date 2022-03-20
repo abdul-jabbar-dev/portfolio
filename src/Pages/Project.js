@@ -26,7 +26,7 @@ const Project = () => {
         <Container sx={{ mt: 9, bgcolor: '#302F4E', borderRadius: '10px' }}>
             {
                 !spin ? <Box>
-                    <Typography variant='h3' py={5} sx={{ textTransform: 'uppercase' }} mt={6}>{devProject.pName}</Typography>
+                    <Typography variant='h3' py={5} sx={{ textTransform: 'uppercase' }} mt={6}>{devProject.websiteName}</Typography>
                     <Box>
                         <img style={{ borderRadius: '10px' }} src={imgS} width={'100%'} alt="" />
                     </Box>
@@ -42,9 +42,9 @@ const Project = () => {
                         </Grid>
                     </Grid>
                     <Stack my={6} spacing={2} justifyContent='center' direction="row">
-                        <Button variant="outlined" onClick={() => window.open(devProject.liveSite)} color="warning" size='large'>Demo site</Button>
-                        <Button variant="outlined" onClick={() => window.open(devProject.clientSite)} size='large'>Client site code</Button>
-                        <Button variant="outlined" disabled={!devProject.serverSite} onClick={() => window.open(devProject.serverSite)} size='large'>server site code</Button>
+                        <Button variant="outlined" onClick={() => window.open(devProject.liveLink)} color="warning" size='large'>Demo site</Button>
+                        <Button variant="outlined" onClick={() => window.open(devProject.clientLink)} size='large'>Client site code</Button>
+                        <Button variant="outlined" disabled={!devProject.serverLink} onClick={() => window.open(devProject.serverLink)} size='large'>server site code</Button>
                     </Stack>
                     <Box textAlign={'start'} maxWidth={'600px'} py={6}>
                         <Typography variant='h6'>{devProject.discription}</Typography><br />

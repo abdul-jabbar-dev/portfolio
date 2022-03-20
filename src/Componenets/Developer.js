@@ -12,12 +12,12 @@ const Developer = () => {
     const onDownload = () => {
         const link = document.createElement("a");
         link.download = `download.txt`;
-        link.href = "https://drive.google.com/u/2/uc?id=1BkobdN6Po1dKR6FGARzhszyVZIZ8qG_i&export=download";
+        link.href = "https://drive.google.com/u/0/uc?id=10BYdNG36oRXNG0aTIDytlsGTb_q0eH7b&export=download";
         link.click();
     };
 
     return (<>
-        <Box textAlign={'center'} height={"100vh"}  display={'flex'} justifyContent={'center'} alignItems={'center'}>
+        <Box textAlign={'center'} height={"100vh"} display={'flex'} justifyContent={'center'} alignItems={'center'}>
             <Box display={'flex'} gap={'50px'} sx={{ flexDirection: 'column', alignContent: 'center', alignItems: 'center' }}>
                 <Avatar
                     alt="Remy Sharp"
@@ -26,7 +26,7 @@ const Developer = () => {
                     sx={{ width: 150, height: 150, }}
                 />
                 <Box textAlign={'center'}>
-                    <Typography fontWeight={'bold'} variant='h3'sx={{textTransform:'uppercase',letterSpacing:'6px'}} >Abdul jabbar</Typography>
+                    <Typography fontWeight={'bold'} variant='h3' sx={{ textTransform: 'uppercase', letterSpacing: '6px' }} >Abdul jabbar</Typography>
                     <br />
                     <TextMotion></TextMotion><br />
                     <Box mx={'auto'} sx={{
@@ -53,7 +53,7 @@ const Developer = () => {
                         </Stack>
 
                     </Box><br /><br />
-                    <Button className='btn' color='secondary' variant='secondary' sx={{ letterSpacing:'3px',borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} startIcon={<ArrowCircleDownIcon />} onClick={onDownload}>Download cv</Button>
+                    <Button className='btn' color='secondary' variant='secondary' sx={{ letterSpacing: '3px', borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} startIcon={<ArrowCircleDownIcon />} onClick={onDownload}>Download cv</Button>
                 </Box>
             </Box>
             <div className="scrollContainer">
@@ -63,8 +63,8 @@ const Developer = () => {
                 </div>
             </div>
         </Box>
-        
-        </>
+
+    </>
     );
 };
 
