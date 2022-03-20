@@ -28,6 +28,7 @@ const deleteDataLocal = (record, name) => {
             delete exist[name]
             localStorage.setItem(record, JSON.stringify(exist))
         }
+        localStorage.removeItem(record)
     } else {
     }
 }

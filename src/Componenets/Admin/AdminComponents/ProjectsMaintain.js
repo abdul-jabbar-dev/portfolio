@@ -78,7 +78,7 @@ const ProjectsMaintain = () => {
         formdata.append('discription', websiteInfo.discription)
         formdata.append('fecilites', websiteInfo.fecilites)
         formdata.append('technology', websiteInfo.technology)
-        if (websiteInfo.siteScreenShort ) {
+        if (websiteInfo.siteScreenShort) {
             for (let key of websiteInfo.siteScreenShort) {
                 let fileData = new Blob([websiteInfo.siteScreenShort[key]]);
                 console.log(fileData)

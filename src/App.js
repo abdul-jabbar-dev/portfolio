@@ -1,7 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import EditProfile from './Componenets/Admin/AdminComponents/EditProfile';
 import MailsMaintain from './Componenets/Admin/AdminComponents/MailsMaintain';
 import ProjectsMaintain from './Componenets/Admin/AdminComponents/ProjectsMaintain';
+import SettingsPage from './Componenets/Admin/AdminComponents/SettingsPage';
 
 import Navigator from './Componenets/Navigat/Navigator';
 import Projects from './Componenets/Projects';
@@ -28,6 +30,8 @@ function App() {
         <Route path="/admin" element={< AuthonticationPage ><Admin /></AuthonticationPage>} >
           <Route path="mails" element={<MailsMaintain />} />
           <Route path="projects" element={<ProjectsMaintain />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="editprofile" element={<EditProfile />} />
         </Route>
       </Routes>
     </div>

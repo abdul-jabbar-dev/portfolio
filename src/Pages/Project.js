@@ -1,7 +1,7 @@
 import { Container, Typography, Box, Grid, Stack, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { myProject } from '../allProjects';
+
 import CircularProgress from '@mui/material/CircularProgress';
 import '../Componenets/style.css'
 
@@ -12,26 +12,27 @@ const Project = () => {
     const [devProject, setDevProject] = useState([])
     useEffect(() => {
         setSpin(true)
-        setDevProject(myProject.find((e) => {
-            setSpin(false)
-            setImgS(devProject.img1)
-            return (e.id === parseInt(id))
-        }))
-    }, [devProject.img1, id])
+        fetch(`http://localhost:2001/projects/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                setDevProject(data)
+                setSpin(false)
+            })
+    }, [devProject, id])
 
-    const [imgS, setImgS] = useState(devProject.img1)
-    console.log(imgS);
+    // const [imgS, setImgS] = useState(devProject.siteThumbnail)
+    console.log(devProject);
     // console.log(a)
     return (
         <Container sx={{ mt: 9, bgcolor: '#302F4E', borderRadius: '10px' }}>
             {
                 !spin ? <Box>
-                    <Typography variant='h3' py={5} sx={{ textTransform: 'uppercase' }} mt={6}>{devProject.websiteName}</Typography>
+                    {/* <Typography variant='h3' py={5} sx={{ textTransform: 'uppercase' }} mt={6}>{devProject.websiteName}</Typography> */}
                     <Box>
-                        <img style={{ borderRadius: '10px' }} src={imgS} width={'100%'} alt="" />
+                        {/* <img style={{ borderRadius: '10px' }} src={imgS} width={'100%'} alt="" /> */}
                     </Box>
                     <Grid justifyContent={'center'} mt={'5px'} spacing={5} container>
-                        <Grid xs={3} item>
+                        {/* <Grid xs={3} item>
                             <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject.img1} alt='website' width={'100%'} />
                         </Grid>
                         <Grid xs={3} item>
@@ -39,9 +40,9 @@ const Project = () => {
                         </Grid>
                         <Grid xs={3} item>
                             <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject.img3} alt='website' width={'100%'} />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
-                    <Stack my={6} spacing={2} justifyContent='center' direction="row">
+                    {/* <Stack my={6} spacing={2} justifyContent='center' direction="row">
                         <Button variant="outlined" onClick={() => window.open(devProject.liveLink)} color="warning" size='large'>Demo site</Button>
                         <Button variant="outlined" onClick={() => window.open(devProject.clientLink)} size='large'>Client site code</Button>
                         <Button variant="outlined" disabled={!devProject.serverLink} onClick={() => window.open(devProject.serverLink)} size='large'>server site code</Button>
@@ -53,7 +54,7 @@ const Project = () => {
                         <Typography  variant='h4'>Facilities</Typography>
                         <Typography fontWeight={'300'} variant='body1'>{devProject.fecilites}</Typography>
 
-                    </Box>
+                    </Box> */}
 
                 </Box>
                     : <CircularProgress />
