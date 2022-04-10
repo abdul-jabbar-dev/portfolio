@@ -6,7 +6,6 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import React, { useEffect, useState } from 'react';
 import developerImg from '../Componenets/Avatar.png'
 import '../index.css'
-import ShortBio from '../Componenets/ShortBio';
 const DevAboutMe = () => {
     const [progress1, setProgress1] = useState(0);
     const [progress2, setProgress2] = useState(0);
