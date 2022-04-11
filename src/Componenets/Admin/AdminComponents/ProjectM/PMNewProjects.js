@@ -90,7 +90,7 @@ const PMNewProjects = ({ container }) => {
                 display={'flex'}
                 id={'mainForm'}
                 alignItems={'center'}
-                // encType={'multipart/form-data'}
+                encType={'multipart/form-data'}
                 justifyContent={'center'}
                 flexDirection={'column'}
                 component="form"

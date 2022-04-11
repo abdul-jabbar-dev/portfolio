@@ -5,7 +5,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import apiFech from '../../../../api/Fech';
 
 const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
-
+    console.log(projects);
     const style = {
         position: 'absolute',
         top: '50%',
@@ -35,10 +35,15 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                 </Typography>
                 <Box component="form" /* onSubmit={handleSubmit} */ noValidate sx={{ mt: 1 }}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12} sm={12} mt={2} display={'flex'} justifyContent={'space-around'}>
-                            {
-                                Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')).map(image => <img style={{ borderRadius: '5px' }} src={projects[image]} width={'100'} alt={projects.websiteName} />)
-                            }
+                        <Grid item xs={12} sm={12} mt={2} display={'flex'} >
+                            <Box display={'flex'} width={'100%'} spacing={5} justifyContent={'space-evenly'}>
+                                <img width={'100px'} src={projects.siteThumbnail} alt="" srcset="" />
+                                <input type="file" name="" filename={projects.siteThumbnail} /* defaultValue={projects.siteThumbnail}  */id="" />
+
+                                {
+                                    Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')).map(image => <><img style={{ borderRadius: '5px' }} src={projects[image]} width={'100px'} alt={projects.websiteName} /> <input type="file" name="" id="" filename={projects[image]} /></>)
+                                }
+                            </Box>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -49,7 +54,6 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                                 fullWidth
                                 variant="standard"
                                 defaultValue={projects.websiteName}
-
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
