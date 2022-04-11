@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
+import apiFech from '../../../../api/Fech';
 
 const PMNewProjects = ({ container }) => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -76,20 +77,11 @@ const PMNewProjects = ({ container }) => {
                 formdata.append("siteScreenShort" + [i], websiteInfo.siteScreenShort[i])
             };
         }
-        console.log(formdata)
-        fetch('http://localhost:2001/projects', {
-            method: 'POST',
-            body: formdata
-        })
-            .then(res => res.json())
-            // .then(data => document.querySelector('#mainForm').reset())
-            .then(data => document.querySelector('#mainForm').reset())
-            .catch((res) => console.log(res))
-
+        apiFech.postProject('http://localhost:2001/projects', { body: formdata }, data => document.querySelector('#mainForm').reset(), (res) => console.log(res))
     }
 
     return (
-        <Portal container={container.current}>
+        <Portal container={container.current} >
             <Box
                 method='post'
                 onSubmit={e => postData(e)}
@@ -105,6 +97,7 @@ const PMNewProjects = ({ container }) => {
                 sx={{
                     '& .MuiTextField-root': { marginY: 1 },
                 }}
+
                 autoComplete="off"
             >
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
@@ -146,6 +139,7 @@ const PMNewProjects = ({ container }) => {
                 </Box>
                 <br />
                 <TextField
+                    sx={{ input: { color: 'white', fontWeight: "400" }, label: { color: '#4E8AAE', fontWeight: "400" } }}
                     size='small'
                     color='primary'
                     style={{ width: '100%' }}
@@ -158,8 +152,7 @@ const PMNewProjects = ({ container }) => {
                 />
                 <Box display={'flex'} width={'100%'} columnGap={'10px'} >
                     <TextField
-                        sx={{ input: { color: 'white', letterSpacing: '3px', fontWeight: "200" } }}
-                        color='primary'
+                        sx={{ input: { color: 'white', fontWeight: "400" }, label: { color: '#4E8AAE', fontWeight: "400" } }} color='primary'
                         style={{ width: '33%' }}
                         required
                         label="Live Site link"
@@ -168,8 +161,7 @@ const PMNewProjects = ({ container }) => {
 
                     />
                     <TextField
-                        sx={{ input: { color: 'white', fontWeight: "200" } }}
-                        color='primary'
+                        sx={{ input: { color: 'white', fontWeight: "400" }, label: { color: '#4E8AAE', fontWeight: "400" } }} color='primary'
                         style={{ width: '33%' }}
                         required
                         label="Client Site link"
@@ -178,8 +170,7 @@ const PMNewProjects = ({ container }) => {
 
                     />
                     <TextField
-                        sx={{ input: { color: 'white', fontWeight: "200" } }}
-                        color='primary'
+                        sx={{ input: { color: 'white', fontWeight: "400" }, label: { color: '#4E8AAE', fontWeight: "400" } }} color='primary'
                         style={{ width: '33%' }}
                         label="Server Site link"
                         name="serverLink"
@@ -188,8 +179,7 @@ const PMNewProjects = ({ container }) => {
                     />
                 </Box>
                 <TextField
-                    sx={{ input: { color: 'white', fontWeight: "200" } }}
-                    color='primary'
+                    sx={{ input: { color: 'white', fontWeight: "400" }, label: { color: '#4E8AAE', fontWeight: "400" } }} color='primary'
                     style={{ width: '100%' }}
                     required
                     label="Discription"
@@ -198,8 +188,7 @@ const PMNewProjects = ({ container }) => {
 
                 />
                 <TextField
-                    sx={{ input: { color: 'white', fontWeight: "200" } }}
-                    color='primary'
+                    sx={{ input: { color: 'white', fontWeight: "400" }, label: { color: '#4E8AAE', fontWeight: "400" } }} color='primary'
                     style={{ width: '100%' }}
                     required
                     label="Fecilites"
@@ -208,8 +197,7 @@ const PMNewProjects = ({ container }) => {
 
                 />
                 <TextField
-                    sx={{ input: { color: 'white', fontWeight: "200" } }}
-                    color='primary'
+                    sx={{ input: { color: 'white', fontWeight: "400" }, label: { color: '#4E8AAE', fontWeight: "400" } }} color='primary'
 
                     style={{ width: '100%' }}
                     required

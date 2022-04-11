@@ -1,18 +1,17 @@
-import {Container, Grid, Skeleton, Typography } from '@mui/material';
+import { Container, Grid, Skeleton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+
+
 
 import './Projects.css'
 import { Link } from 'react-router-dom';
+import apiFech from '../api/Fech';
 const Projects = () => {
     const [devProjects, setDevProjects] = useState([])
     const [loding, setLoding] = useState(false)
-    console.log(devProjects);
     useEffect(() => {
         setLoding(true)
-        fetch('http://localhost:2001/projects')
-            .then(res => res.json())
-            .then(data => setDevProjects(data))
-            .finally((res) => setLoding(false))
+        apiFech.getProjectAll('http://localhost:2001/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
     }, [])
 
     return (

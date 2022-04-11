@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import '../Componenets/style.css'
+import apiFech from '../api/Fech';
 
 
 const Project = () => {
@@ -12,12 +13,10 @@ const Project = () => {
     const [devProject, setDevProject] = useState([])
     useEffect(() => {
         setSpin(true)
-        fetch(`http://localhost:2001/projects/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                setDevProject(data)
-                setSpin(false)
-            })
+        apiFech.getProjectAll(`http://localhost:2001/projects/${id}`, data => {
+            setDevProject(data)
+            setSpin(false)
+        })
     }, [id])
 
     const { websiteName, liveLink, clientLink, serverLink, discription, fecilites, technology, siteThumbnail } = devProject

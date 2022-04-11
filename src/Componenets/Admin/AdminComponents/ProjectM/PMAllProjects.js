@@ -7,19 +7,23 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Portal, Skeleton } from '@mui/material';
+import PMUpdateProjects from './PMUpdateProjects';
+import apiFech from '../../../../api/Fech';
 
 const PMAllProjects = ({ container }) => {
     const [projects, setProjects] = useState([])
     const [loding, setLoding] = useState(false)
+    const [sencing, setSencing] = useState('')
 
     useEffect(() => {
         setLoding(true)
-        fetch('http://localhost:2001/projects')
-            .then(res => res.json())
-            .then(data => setProjects(data))
-            .finally((res) => setLoding(false))
-    }, [])
-     return (
+        apiFech.getProjectAll('http://localhost:2001/projects', data => setProjects(data), null, (res) => setLoding(false))
+        setSencing('')
+
+    }, [sencing])
+
+
+    return (
         <Portal container={container.current}>
             <TableContainer sx={{ backgroundColor: 'transparent', 'td,tr,th': { color: 'white', borderColor: '#302F4E' } }} component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -42,7 +46,7 @@ const PMAllProjects = ({ container }) => {
                                 key={index}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0, borderColor: 'lightgray' } }}
                             >
-                                <TableCell component="th" scope="row">{row.websiteName}</TableCell>
+                                <TableCell component="th" scope="row" ><PMUpdateProjects projects={row} response={setSencing} ></PMUpdateProjects></TableCell>
                                 <TableCell align="right">{row.createDate}</TableCell>
                                 <TableCell align="right">{row.fat}</TableCell>
                                 <TableCell align="right">
@@ -59,6 +63,7 @@ const PMAllProjects = ({ container }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
+
         </Portal>
     );
 };
