@@ -31,7 +31,7 @@ const Projects = () => {
                                 <figure className="effect-sadie">
                                     {<img src={e.siteThumbnail} /* src={e.img1} */ alt="img02" />}
                                     <figcaption>
-                                        <h2>{e.websiteName.split(' ')[0]} <span>{e.websiteName.split(' ')[1]}</span> </h2>
+                                        <h2>{e.websiteName?.split(' ')[0]} <span>{e.websiteName?.split(' ')[1]}</span> </h2>
                                         <p>{e.discription}</p>
                                         <a href={e.link}>View more</a>
                                         <Link to={`/projects/${e._id}`}></Link>

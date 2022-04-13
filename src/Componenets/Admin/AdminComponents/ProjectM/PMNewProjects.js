@@ -64,7 +64,6 @@ const PMNewProjects = ({ container }) => {
         if (websiteInfo.siteScreenShort) {
             for (let key of websiteInfo.siteScreenShort) {
                 let fileData = new Blob([websiteInfo.siteScreenShort[key]]);
-                console.log(fileData)
                 let reader = new FileReader();
                 reader.readAsArrayBuffer(fileData);
                 reader.onload = () => {

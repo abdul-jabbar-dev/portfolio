@@ -1,16 +1,17 @@
 import { Box, Grid, IconButton, Modal, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
 import apiFech from '../../../../api/Fech';
 
-
 const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
     const [updateWebsiteInfo, setUpdateWebsiteInfo] = useState({ ...projects })
-
+    const [oldImg, setOldImg] = useState({})
+    const thumImg = useRef(null)
 
     const getUpdateValue = (e) => {
         if (e.target.type === 'files' || e.target.type === 'file') {
+            !updateWebsiteInfo[e.target.name].name && setOldImg({ ...oldImg, [e.target.name]: updateWebsiteInfo[e.target.name] });
             setUpdateWebsiteInfo({ ...updateWebsiteInfo, [e.target.name]: e.target.files[0] });
         } else {
             setUpdateWebsiteInfo({ ...updateWebsiteInfo, [e.target.name]: e.target.value });
@@ -18,13 +19,20 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        // apiFech.updateProject('http://localhost:2001/projects/' + projects._id, { headers: { 'Content-Type': 'application/*' }, body: JSON.stringify({ 'a': 'updateWebsiteInfo' }) }, (res) => console.log(res), {}, {})
-        fetch('http://localhost:2001/projects/' + projects._id, {
-            method: 'PUT',
-            body: updateWebsiteInfo
-        }).then(res => res)
-    }
+        const formData = new FormData();
+        for (const iterator in updateWebsiteInfo) {
+            formData.append(iterator, updateWebsiteInfo[iterator])
+        }
 
+        console.log(oldImg);
+        if (oldImg) {
+            Object.keys(oldImg).forEach(key => formData.append('old'+key, oldImg[key]));
+            // formData.append('oldimge',{...oldImg})
+        }
+
+
+        apiFech.updateProject(`http://localhost:2001/projects/${projects._id}`, { body: formData }, (res) => console.log(res))
+    }
     const style = {
         position: 'absolute',
         top: '50%',
@@ -40,8 +48,6 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
         'input': { color: 'white !important', },
         'label': { color: '#4E8AAE !important', },
     };
-    // console.log(Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')))
-    // getDataSF.samePropertyInObj(projects, 'siteScreenShort').map((value, index, array) => console.log(value))
     return (<>
         <Modal
             open={modalOpen}
@@ -49,7 +55,6 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-
             <Box sx={style}>
                 <Typography variant="h6" textAlign={'center'} gutterBottom>
                     {projects.websiteName}
@@ -58,11 +63,14 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={12} mt={2} display={'flex'} >
                             <Box display={'flex'} width={'100%'} spacing={5} justifyContent={'space-evenly'}>
-                                <img width={'100px'} src={projects.siteThumbnail} alt="" />
-                                <input onChange={e => getUpdateValue(e)} type="file" name="siteThumbnail" filename={projects.siteThumbnail} /* defaultValue={projects.siteThumbnail}  */ id="" />
-
+                                <img width={'100px'} src={updateWebsiteInfo.siteThumbnail?.name ? URL.createObjectURL(updateWebsiteInfo.siteThumbnail) : projects.siteThumbnail} onClick={e => thumImg.current.click()} alt="siteThumbnail" />
+                                <input onChange={e => getUpdateValue(e)} type="file" style={{ display: 'none' }} ref={thumImg} name="siteThumbnail" filename={projects.siteThumbnail} />
                                 {
-                                    Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')).map(image => <><img style={{ borderRadius: '5px' }} src={projects[image]} width={'100px'} alt={projects.websiteName} /> <input type="file" onChange={e => getUpdateValue(e)} name={image} filename={projects[image]} /></>)
+                                    Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')).map((image, index) =>
+                                        <div key={index}>
+                                            <img style={{ borderRadius: '5px' }} src={updateWebsiteInfo[image].name ? URL.createObjectURL(updateWebsiteInfo[image]) : projects[image]} width={'100px'} onClick={e => document.querySelector('#' + image).click()} alt={projects.websiteName} />
+                                            <input type="file" onChange={e => getUpdateValue(e)} name={image} style={{ display: 'none' }} id={image} filename={projects[image]} />
+                                        </div>)
                                 }
                             </Box>
                         </Grid>
@@ -75,7 +83,6 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                                 label="websiteName"
                                 fullWidth
                                 variant="standard"
-                                // {...this}
                                 defaultValue={projects.websiteName || projects.websiteName}
                             />
                         </Grid>
