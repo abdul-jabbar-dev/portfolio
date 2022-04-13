@@ -3,7 +3,7 @@ import Developer from '../Componenets/Developer';
 import About from '../Componenets/About';
 import Projects from '../Componenets/Projects';
 import ContactWithMe from '../Componenets/ContactWithMe';
-import Price from '../Componenets/Price';
+// import Price from '../Componenets/Price';
 const Home = () => {
     return (
         <div>

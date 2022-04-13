@@ -33,6 +33,13 @@ class Fech {
             .catch(err => catcherr && catcherr(err))
             .finally((res) => finallycb && finallycb(res))
     }
+    updateProject(url, optionalObj, cb, catcherr = null, finallycb = null) {
+        fetch(url, { method: 'PUT', ...optionalObj })
+            .then(res => res.json())
+            .then(data => cb(data))
+            .catch(err => catcherr && catcherr(err))
+            .finally((res) => finallycb && finallycb(res))
+    }
     rmProject(url, optionalObj = null, cb, catcherr = null, finallycb = null) {
         fetch(url, { method: 'DELETE', ...optionalObj })
             .then(res => res.json())

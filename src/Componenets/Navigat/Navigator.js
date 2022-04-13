@@ -6,7 +6,6 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
 import TimelineIcon from '@mui/icons-material/Timeline';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { NavLink } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 

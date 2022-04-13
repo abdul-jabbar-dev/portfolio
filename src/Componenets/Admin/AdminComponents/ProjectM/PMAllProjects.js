@@ -37,8 +37,8 @@ const PMAllProjects = ({ container }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {loding ? (Array.from(new Array(6))).map(e =>
-                            <TableCell scope="row"><Skeleton animation="wave" sx={{ bgcolor: 'red.900', borderRadius: '10px' }} height='30px' />
+                        {loding ? (Array.from(new Array(6))).map((e,index) =>
+                            <TableCell key={index} scope="row"><Skeleton animation="wave" sx={{ bgcolor: 'red.900', borderRadius: '10px' }} height='30px' />
                             </TableCell>
 
                         ) : projects.map((row, index) => (

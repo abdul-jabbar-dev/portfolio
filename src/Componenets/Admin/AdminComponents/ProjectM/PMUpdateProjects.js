@@ -4,8 +4,27 @@ import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
 import apiFech from '../../../../api/Fech';
 
+
 const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
-    console.log(projects);
+    const [updateWebsiteInfo, setUpdateWebsiteInfo] = useState({ ...projects })
+
+
+    const getUpdateValue = (e) => {
+        if (e.target.type === 'files' || e.target.type === 'file') {
+            setUpdateWebsiteInfo({ ...updateWebsiteInfo, [e.target.name]: e.target.files[0] });
+        } else {
+            setUpdateWebsiteInfo({ ...updateWebsiteInfo, [e.target.name]: e.target.value });
+        }
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // apiFech.updateProject('http://localhost:2001/projects/' + projects._id, { headers: { 'Content-Type': 'application/*' }, body: JSON.stringify({ 'a': 'updateWebsiteInfo' }) }, (res) => console.log(res), {}, {})
+        fetch('http://localhost:2001/projects/' + projects._id, {
+            method: 'PUT',
+            body: updateWebsiteInfo
+        }).then(res => res)
+    }
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -21,6 +40,8 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
         'input': { color: 'white !important', },
         'label': { color: '#4E8AAE !important', },
     };
+    // console.log(Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')))
+    // getDataSF.samePropertyInObj(projects, 'siteScreenShort').map((value, index, array) => console.log(value))
     return (<>
         <Modal
             open={modalOpen}
@@ -33,31 +54,34 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                 <Typography variant="h6" textAlign={'center'} gutterBottom>
                     {projects.websiteName}
                 </Typography>
-                <Box component="form" /* onSubmit={handleSubmit} */ noValidate sx={{ mt: 1 }}>
+                <Box component="form" encType={'multipart/form-data'} onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={12} mt={2} display={'flex'} >
                             <Box display={'flex'} width={'100%'} spacing={5} justifyContent={'space-evenly'}>
-                                <img width={'100px'} src={projects.siteThumbnail} alt="" srcset="" />
-                                <input type="file" name="" filename={projects.siteThumbnail} /* defaultValue={projects.siteThumbnail}  */id="" />
+                                <img width={'100px'} src={projects.siteThumbnail} alt="" />
+                                <input onChange={e => getUpdateValue(e)} type="file" name="siteThumbnail" filename={projects.siteThumbnail} /* defaultValue={projects.siteThumbnail}  */ id="" />
 
                                 {
-                                    Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')).map(image => <><img style={{ borderRadius: '5px' }} src={projects[image]} width={'100px'} alt={projects.websiteName} /> <input type="file" name="" id="" filename={projects[image]} /></>)
+                                    Object.getOwnPropertyNames(projects).filter((e) => e.includes('siteScreenShort')).map(image => <><img style={{ borderRadius: '5px' }} src={projects[image]} width={'100px'} alt={projects.websiteName} /> <input type="file" onChange={e => getUpdateValue(e)} name={image} filename={projects[image]} /></>)
                                 }
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={e => getUpdateValue(e)}
                                 required
                                 id="websiteName"
                                 name="websiteName"
                                 label="websiteName"
                                 fullWidth
                                 variant="standard"
-                                defaultValue={projects.websiteName}
+                                // {...this}
+                                defaultValue={projects.websiteName || projects.websiteName}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={e => getUpdateValue(e)}
                                 required
                                 id="liveLink"
                                 name="liveLink"
@@ -71,6 +95,7 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
 
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={e => getUpdateValue(e)}
                                 required
                                 id="clientLink"
                                 name="clientLink"
@@ -82,6 +107,7 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={e => getUpdateValue(e)}
                                 id="serverLink"
                                 name="serverLink"
                                 label="Server Link"
@@ -93,6 +119,7 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={e => getUpdateValue(e)}
                                 required
                                 id="discription"
                                 name="discription"
@@ -104,6 +131,7 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                onChange={e => getUpdateValue(e)}
                                 required
                                 id="technology"
                                 name="technology"
@@ -115,6 +143,7 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
                         </Grid>
                         <Grid item xs={12} sm={12}>
                             <TextField
+                                onChange={e => getUpdateValue(e)}
                                 required
                                 id="fecilites"
                                 name="fecilites"

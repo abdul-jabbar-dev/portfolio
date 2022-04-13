@@ -23,8 +23,8 @@ const ProjectsMaintain = () => {
 
     return (
         <div>
-            <Button color='success' onClick={() => showDetais('create')}>{createForm ? 'Close project' : 'Create project'}</Button><br />
-            <Button color='success' onClick={() => showDetais('table')}>{allProjects ? 'Hide All project' : 'Show All project'}</Button><br />
+            <Button color='warning' onClick={() => showDetais('create')}>{createForm ? 'Close project' : 'Create project'}</Button><br />
+            <Button color='warning' onClick={() => showDetais('table')}>{allProjects ? 'Hide All project' : 'Show All project'}</Button><br />
 
             <Box sx={{ p: 1, my: 1, }}>
 

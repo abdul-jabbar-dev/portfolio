@@ -19,13 +19,13 @@ const Projects = () => {
             <Typography variant='h4'>Recent Projects</Typography>
             <br />
             <Grid container spacing={2} >
-                {loding ? (Array.from(new Array(6))).map(e =>
-                    <Grid item xs={12} sm={6} md={4}>
+                {loding ? (Array.from(new Array(6))).map((e, index)=>
+                    <Grid item xs={12} sm={6} md={4} key={index}>
                         <Skeleton animation="wave" sx={{ bgcolor: 'red.900', borderRadius: '10px' }} height='350px' />
                     </Grid>
                 )
                     :
-                    devProjects.map((e) =>
+                    devProjects.map((e,index) =>
                         <Grid key={e._id} item xs={12} sm={6} md={4}>
                             <div className="grid">
                                 <figure className="effect-sadie">
