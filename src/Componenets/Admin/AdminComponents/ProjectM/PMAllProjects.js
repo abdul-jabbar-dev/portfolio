@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Portal, Skeleton } from '@mui/material';
+import { Box, Portal, Skeleton } from '@mui/material';
 import PMUpdateProjects from './PMUpdateProjects';
 import apiFech from '../../../../api/Fech';
 
@@ -22,7 +22,7 @@ const PMAllProjects = ({ container }) => {
 
     }, [sencing])
 
-
+console.log(projects);
     return (
         <Portal container={container.current}>
             <TableContainer sx={{ backgroundColor: 'transparent', 'td,tr,th': { color: 'white', borderColor: '#302F4E' } }} component={Paper}>
@@ -48,7 +48,7 @@ const PMAllProjects = ({ container }) => {
                             >
                                 <TableCell component="th" scope="row" ><PMUpdateProjects projects={row} response={setSencing} ></PMUpdateProjects></TableCell>
                                 <TableCell align="right">{row.createDate}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
+                                <TableCell align="right">{row?.lastModified ? new Date(row?.lastModified).toDateString() : <Box sx={{color: 'gray'}} >No Modified</Box>}</TableCell>
                                 <TableCell align="right">
                                     <small>
                                         <a href={row.liveLink}>Goto the website</a><br />

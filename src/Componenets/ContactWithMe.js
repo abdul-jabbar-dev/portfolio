@@ -12,16 +12,16 @@ const ContactWithMe = () => {
         return <p>Thanks for contact!</p>;
     }
     return (
-        <Container sx={{ p: 6,}} >
+        <Container sx={{ p: 6, }} >
             <Box>
                 <Typography py={5} variant='h4'>Contact With me</Typography>
             </Box>
-            <Grid justifyContent={'center'} alignContent={'center'} alignItems={'stretch'} sx={{ /* bgcolor: '#fff',  */p: 5,  border: '1px solid  #25253b ', borderRadius: 3,  }} container>
-               <Grid xs={4} item>
+            <Grid justifyContent={'center'} alignContent={'center'} alignItems={'stretch'} sx={{ /* bgcolor: '#fff',  */p: 5, border: '1px solid  #302F4E ', borderRadius: 3, 'fieldset': { border: '1px solid #302F4E' } }} container>
+                <Grid xs={4} item>
                     <img width={'100%'} src={commentImg} alt="" />
-               </Grid>
-                <Grid xs={12} sm={8} item sx={{ p: 2, textShadow:'0px 0 #25253b;'}} >
-                    <form id='fom' onSubmit={handleSubmit}>
+                </Grid>
+                <Grid xs={12} sm={8} item sx={{ p: 2, textShadow: '0px 0 #25253b;' }} >
+                    <form sx={{ 'input': { color: '#fff !important',} }} id='fom' onSubmit={handleSubmit}>
                         <TextField
                             required
                             fullWidth
@@ -71,7 +71,7 @@ const ContactWithMe = () => {
                         />
 
                         <Button
-                            endIcon={<SendIcon/>}
+                            endIcon={<SendIcon />}
                             type="submit"
                             disabled={state.submitting}
                             variant="contained"
@@ -83,7 +83,7 @@ const ContactWithMe = () => {
                         </Button>
                     </form>
                 </Grid>
-           </Grid>
+            </Grid>
         </Container>
     );
 };

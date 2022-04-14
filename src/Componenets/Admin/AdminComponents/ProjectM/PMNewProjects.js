@@ -1,4 +1,4 @@
-import { Box, Fab, Portal, TextField } from '@mui/material';
+import { Alert, Box, Button, Fab, Portal, Snackbar, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -12,6 +12,9 @@ const PMNewProjects = ({ container }) => {
     //site screenshot
     const [selectedScreenshort, setSelectedScreenshort] = useState(null);
     const [screenshortUrl, setScreenshortUrl] = useState(null);
+    const handleClick = () => {
+        setOpen(true);
+    };
     //user data in input
 
     const [websiteInfo, setWebsiteInfo] = useState({
@@ -76,9 +79,24 @@ const PMNewProjects = ({ container }) => {
                 formdata.append("siteScreenShort" + [i], websiteInfo.siteScreenShort[i])
             };
         }
-        apiFech.postProject('http://localhost:2001/projects', { body: formdata }, data => document.querySelector('#mainForm').reset(), (res) => console.log(res))
+        apiFech.postProject('http://localhost:2001/projects', { body: formdata }, data => {
+            handleClick();
+            setImageUrl(null)
+            setScreenshortUrl(null)
+            document.querySelector('#mainForm').reset()
+        }, (res) => console.log(res))
     }
+    const [open, setOpen] = React.useState(false);
 
+
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     return (
         <Portal container={container.current} >
             <Box
@@ -95,6 +113,7 @@ const PMNewProjects = ({ container }) => {
                 component="form"
                 sx={{
                     '& .MuiTextField-root': { marginY: 1 },
+                    'fieldset': { border: '1px solid white !important' }
                 }}
 
                 autoComplete="off"
@@ -205,8 +224,12 @@ const PMNewProjects = ({ container }) => {
                     onChange={(e) => getValue(e, e.target.value)}
 
                 />
-                <input style={{ padding: '8px 20px', borderRadius: '5px' }} type="submit" value="Sumbit" />
-
+                <Button sx={{ letterSpacing: '3px', color: 'white', backgroundColor: '#7B1FA2', '&:hover': { color:'#ED6C2A'} }} style={{ padding: '8px 20px', borderRadius: '5px' }} type="submit" value="Sumbit" >Sumbit</Button>
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Create project successfully!
+                    </Alert>
+                </Snackbar>
 
             </Box>
         </Portal>
