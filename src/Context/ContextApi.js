@@ -1,9 +1,13 @@
-//  !! feching all deta and context everywere
-// import apiFech from "../api/Fech";
-
 // class Context {
+//     constructor() {
+//         this.state = {
+//             name: ''
+//         }
+//     }
 //     getProjects() {
-
-//         apiFech.getProjectAll('http://localhost:2001/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
+//         this.setState({ name: 'dsfsfsf' })
+//         return this.state.name
 //     }
 // }
+// const dataApi = new Context()
+// export default dataApi
