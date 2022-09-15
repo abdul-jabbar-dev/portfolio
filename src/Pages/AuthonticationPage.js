@@ -7,7 +7,6 @@ const AuthonticationPage = ({ children }) => {
     let location = useLocation();
     let user = getDataLocal('user')
     if (!user ) {
-        console.log(!user);
         return <Navigate to="/adminlogin" state={{ from: location }} replace />;
     } else {
         
