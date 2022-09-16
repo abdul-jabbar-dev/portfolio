@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import developerImg from './Avatar.png'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css'
 import TextMotion from './TextMotion';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -8,13 +8,35 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'; import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import apiFech from '../api/Fech';
 const Developer = () => {
+    const [links, setLinks] = useState({})
     const onDownload = () => {
         const link = document.createElement("a");
         link.download = `download.txt`;
         link.href = "https://drive.google.com/u/0/uc?id=10BYdNG36oRXNG0aTIDytlsGTb_q0eH7b&export=download";
         link.click();
     };
+    useEffect(() => {
+        apiFech.getProjectAll('http://localhost:2001/sociallinks', async (res) => await setLinks(res))
+    }, []);
+    const socialIcon = [{
+        icon: <FacebookOutlinedIcon htmlColor='white' />,
+        name: 'facebook',
+    }, {
+        icon: <GitHubIcon htmlColor='white' />,
+        name: 'GitHub',
+    }, {
+        icon: <LinkedInIcon htmlColor='white' />,
+        name: 'Linkedin',
+    }, {
+        icon: <TwitterIcon htmlColor='white' />,
+        name: 'Twitter',
+    }, {
+        icon: <InstagramIcon htmlColor='white' />,
+        name: 'Instagram',
+    },
+    ]
 
     return (<>
         <Box textAlign={'center'} height={"100vh"} display={'flex'} justifyContent={'center'} alignItems={'center'}>
@@ -35,21 +57,9 @@ const Developer = () => {
                         justifyContent: 'space-evenly',
                     }}>
                         <Stack direction="row" spacing={1}>
-                            <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
-                                <FacebookOutlinedIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://github.com/abduljabbar15" aria-label="fingerprint">
-                                <GitHubIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://www.instagram.com/abdul_jabbar153/" aria-label="fingerprint">
-                                <InstagramIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://www.linkedin.com/in/abduljabbar1532002/" aria-label="fingerprint">
-                                <LinkedInIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
-                                <TwitterIcon htmlColor='white' />
-                            </IconButton>
+                            {links.length ? socialIcon?.map((ico, i) => <IconButton key={i} target={'_blank'} href={links?.find(re => re?.name?.toUpperCase() === ico?.name.toUpperCase())?.url} aria-label="fingerprint">
+                                {ico.icon}
+                            </IconButton>) : ''}
                         </Stack>
 
                     </Box><br /><br />

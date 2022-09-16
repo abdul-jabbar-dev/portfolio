@@ -8,7 +8,7 @@ import apiFech from '../../../../api/Fech';
 const PMNewProjects = ({ container }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
-
+    const [open, setOpen] = useState(false);
     //site screenshot
     const [selectedScreenshort, setSelectedScreenshort] = useState(null);
     const [screenshortUrl, setScreenshortUrl] = useState(null);
@@ -86,7 +86,7 @@ const PMNewProjects = ({ container }) => {
             document.querySelector('#mainForm').reset()
         }, (res) => console.log(res))
     }
-    const [open, setOpen] = React.useState(false);
+ 
 
 
 
