@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import '../Componenets/style.css'
 import apiFech from '../api/Fech';
+import HelmetMeta from '../Componenets/Custom Meta/HelmetMeta';
+import { Helmet } from 'react-helmet';
 
 
 const Project = () => {
@@ -13,7 +15,7 @@ const Project = () => {
     const [devProject, setDevProject] = useState([])
     useEffect(() => {
         setSpin(true)
-        apiFech.getProjectAll(`http://localhost:2001/projects/${id}`, data => {
+        apiFech.getProjectAll(`https://determined-cyan-vest.cyclic.app/projects/${id}`, data => {
             setDevProject(data)
             setSpin(false)
         })
@@ -25,21 +27,30 @@ const Project = () => {
 
     return (
         <Container sx={{ mt: 9, bgcolor: '#302F4E', borderRadius: '10px' }}>
+            <Helmet>
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={`https://abduljabbar15.web.app/projects/${id}`} />
+                <meta property="og:title" content={websiteName} />
+                <meta property="og:description" content={discription} />
+                <meta property="og:image" content={siteThumbnail} />
+
+            </Helmet>
+            <HelmetMeta keywords={websiteName} description={discription} pageName={websiteName} title={websiteName}></HelmetMeta>
             {
                 !spin ? <Box>
                     <Typography variant='h3' py={5} sx={{ textTransform: 'uppercase' }} mt={6}>{websiteName}</Typography>
                     <Box>
-                        <img style={{ borderRadius: '10px' }} src={imgS} width={'100%'} alt="" />
+                        <img style={{ borderRadius: '10px' }} src={imgS} width={'100%'} alt={websiteName + " project image"} />
                     </Box>
                     <Grid justifyContent={'center'} mt={'5px'} spacing={5} container>
                         <Grid xs={3} item>
-                            <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject?.siteScreenShort0} alt='website' width={'100%'} />
+                            <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject?.siteScreenShort0} alt={websiteName + " project screen short"} width={'100%'} />
                         </Grid>
                         <Grid xs={3} item>
-                            <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject?.siteScreenShort1} alt='website' width={'100%'} />
+                            <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject?.siteScreenShort1} alt={websiteName + " project screen short"} width={'100%'} />
                         </Grid>
                         <Grid xs={3} item>
-                            <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject?.siteScreenShort2} alt='website' width={'100%'} />
+                            <img onClick={e => setImgS(e.target.src)} className='hoverEffect' src={devProject?.siteScreenShort2} alt={websiteName + " project screen short"} width={'100%'} />
                         </Grid>
                     </Grid>
                     <Stack my={6} spacing={2} justifyContent='center' direction="row">

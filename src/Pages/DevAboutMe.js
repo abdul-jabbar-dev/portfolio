@@ -1,11 +1,10 @@
-import { Avatar, Box, Button, Container, Grid, IconButton, LinearProgress, Stack, Typography } from '@mui/material';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'; import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import { Avatar, Box, Button, Container, Grid, LinearProgress, Stack, Typography } from '@mui/material';
+
 import React, { useEffect, useState } from 'react';
 import developerImg from '../Componenets/Avatar.png'
 import '../index.css'
+import HelmetMeta from '../Componenets/Custom Meta/HelmetMeta';
+import SocialLinks from '../Utility/SocialLinks';
 const DevAboutMe = () => {
     const [progress1, setProgress1] = useState(0);
     const [progress2, setProgress2] = useState(0);
@@ -30,9 +29,13 @@ const DevAboutMe = () => {
     }, []);
     return (
         <div>
+            {
+                window.location.pathname === '/aboutme' && <HelmetMeta description={"I’m a Abdul jabbar, I have a serious passion for creating intuitive, dynamic user experiences. Interested in the entire frontend spectrum and working on ambitious projects with positive people. I'm experienced in developing websites which are fully responsive to all kind of devices. I have the ability to write semantic, cross-browser compatible, clean code by hand that is re-useable, maintainable, and easy to understand. The main areas of my expertise are HTML, CSS, Bootstrap, JavaScript (with React)."} pageName='Abdul Jabbar -Bio'></HelmetMeta>
+
+            }
             <Box mt={{ xs: '20%', sm: '10%', md: '8%' }} display={'flex'} justifyContent={'center'}>
                 <Avatar
-                    alt="Remy Sharp"
+                    alt="Abdul jabbar avatar"
                     src={developerImg}
                     sx={{ width: 250, height: 250, }}
                 />
@@ -44,7 +47,7 @@ const DevAboutMe = () => {
                         <Box display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                             <Typography fontWeight={'bold'} variant='h4' sx={{ textTransform: 'uppercase', letterSpacing: '4px' }} >Abdul jabbar</Typography>
                             <Stack mx={'auto'} direction="row" spacing={1}>
-                                <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
+                                {/* <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
                                     <FacebookOutlinedIcon htmlColor='white' />
                                 </IconButton>
                                 <IconButton target={'_blank'} href="https://github.com/abduljabbar15" aria-label="fingerprint">
@@ -58,7 +61,8 @@ const DevAboutMe = () => {
                                 </IconButton>
                                 <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
                                     <TwitterIcon htmlColor='white' />
-                                </IconButton>
+                                </IconButton> */}
+                                <SocialLinks></SocialLinks>
                             </Stack>
                             <br />
 
@@ -67,7 +71,7 @@ const DevAboutMe = () => {
                         </Box>
 
 
-                        <Grid container  spacing={2}>
+                        <Grid container spacing={2}>
 
                             <Grid item xs={12} textAlign={'start'} md={6}>
                                 {/* <ShortBio></ShortBio> */}

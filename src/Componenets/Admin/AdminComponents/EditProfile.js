@@ -10,7 +10,7 @@ const EditProfile = () => {
     const [sending, setSending] = useState(false)
 
     useEffect(() => {
-        apiFech.getProjectAll('http://localhost:2001/sociallinks', (res => setsocialLinks(res)))
+        apiFech.getProjectAll('https://determined-cyan-vest.cyclic.app/sociallinks', (res => setsocialLinks(res)))
     }, [sending])
 
     const send_link = () => {
@@ -18,7 +18,7 @@ const EditProfile = () => {
 
         if (newSocialLinks.name && newSocialLinks.url && newSocialLinks.priority) {
 
-            apiFech.postProject('http://localhost:2001/sociallinks', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(newSocialLinks) }, (res => console.log(res)), '', () => setSending(true))
+            apiFech.postProject('https://determined-cyan-vest.cyclic.app/sociallinks', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(newSocialLinks) }, (res => console.log(res)), '', () => setSending(true))
         }
 
 

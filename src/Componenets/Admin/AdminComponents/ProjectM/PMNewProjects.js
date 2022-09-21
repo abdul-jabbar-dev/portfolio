@@ -79,7 +79,7 @@ const PMNewProjects = ({ container }) => {
                 formdata.append("siteScreenShort" + [i], websiteInfo.siteScreenShort[i])
             };
         }
-        apiFech.postProject('http://localhost:2001/projects', { body: formdata }, data => {
+        apiFech.postProject('https://determined-cyan-vest.cyclic.app/projects', { body: formdata }, data => {
             handleClick();
             setImageUrl(null)
             setScreenshortUrl(null)

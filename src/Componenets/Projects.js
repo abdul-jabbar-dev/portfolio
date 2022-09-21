@@ -1,24 +1,26 @@
 import { Container, Grid, Skeleton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-
-
-
 import './Projects.css'
 import { Link } from 'react-router-dom';
 import apiFech from '../api/Fech';
+import HelmetMeta from './Custom Meta/HelmetMeta';
 // import contextApi from '../Context/ContextApi';
 // import dataApi from '../Context/ContextApi';
-const Projects = () => {
+const Projects = ({ limit = 16 }) => {
     const [devProjects, setDevProjects] = useState([])
     const [loding, setLoding] = useState(false)
     useEffect(() => {
         setLoding(true)
-        apiFech.getProjectAll('http://localhost:2001/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
+        apiFech.getProjectAll('https://determined-cyan-vest.cyclic.app/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
     }, [])
 
     // dataApi.getProjects()
     return (
         <Container sx={{ my: 10 }}>
+            {
+                window.location.pathname === '/projects' && <HelmetMeta pageName='Abdul Jabbar -Showcase' keywords='project, react projects , free projects,showcase'></HelmetMeta>
+            }
+
             <Typography variant='h4'>Recent Projects</Typography>
             <br />
             <Grid container spacing={2} >
@@ -28,11 +30,11 @@ const Projects = () => {
                     </Grid>
                 )
                     :
-                    devProjects.map((e, index) =>
+                    devProjects.slice(0, limit).map((e, index) =>
                         <Grid key={e._id} item xs={12} sm={6} md={4}>
                             <div className="grid">
                                 <figure className="effect-sadie">
-                                    {<img src={e.siteThumbnail} /* src={e.img1} */ alt="img02" />}
+                                    {<img src={e.siteThumbnail} alt={e.websiteName} />}
                                     <figcaption>
                                         <h2>{e.websiteName?.split(' ')[0]} <span>{e.websiteName?.split(' ')[1]}</span> </h2>
                                         <p>{e.discription}</p>

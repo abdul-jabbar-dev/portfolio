@@ -3,7 +3,7 @@ import apiFech from '../../../api/Fech';
 
 const MailsMaintain = () => {
     useEffect(() => {
-        apiFech.getProjectAll('http://localhost:2001/notification', (res => console.log(res)))
+        apiFech.getProjectAll('https://determined-cyan-vest.cyclic.app/notification', (res => console.log(res)))
     }, [])
 
     return (

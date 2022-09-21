@@ -90,7 +90,7 @@ const ContactWithMe = () => {
                             color='secondary'
                             size='large'
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={e => apiFech.postProject('http://localhost:2001/mails', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(contact) }, res => console.log(res))}
+                            onClick={e => apiFech.postProject('https://determined-cyan-vest.cyclic.app/mails', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(contact) }, res => console.log(res))}
                         >
                             Submit
                         </Button>
