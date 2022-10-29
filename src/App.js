@@ -28,7 +28,7 @@ function App() {
         <Route path="/blogs" element={< Blogs />} />
         <Route path="/adminlogin" element={< AdminLogin />} />
         <Route path="/admin" element={< AuthonticationPage ><Admin /></AuthonticationPage>} >
-          <Route path="mails" element={<MailsMaintain />} />
+          <Route path="notification" element={<MailsMaintain />} />
           <Route path="projects" element={<ProjectsMaintain />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="editprofile" element={<EditProfile />} />

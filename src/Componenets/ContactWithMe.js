@@ -7,15 +7,31 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useState } from 'react';
 import apiFech from '../api/Fech';
+
 const ContactWithMe = () => {
+
+
     const [contact, setContact] = useState({});
 
+
+
     const [state, handleSubmit] = useForm("mbjwrkvj");
+
     if (state.succeeded) {
 
 
         return <p>Thanks for contact!</p>;
     }
+
+    const sendDataBase = (e) => {   
+        if (contact.email && contact.name && contact.message) {
+            apiFech.postProject('http://localhost:2001/notification', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(contact) }, res => {
+                console.log(res)
+            })
+        }
+    }
+
+
 
 
     return (
@@ -90,7 +106,7 @@ const ContactWithMe = () => {
                             color='secondary'
                             size='large'
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={e => apiFech.postProject('https://determined-cyan-vest.cyclic.app/mails', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(contact) }, res => console.log(res))}
+                            onClick={e => sendDataBase(e)}
                         >
                             Submit
                         </Button>

@@ -79,14 +79,20 @@ const PMNewProjects = ({ container }) => {
                 formdata.append("siteScreenShort" + [i], websiteInfo.siteScreenShort[i])
             };
         }
-        apiFech.postProject('https://determined-cyan-vest.cyclic.app/projects', { body: formdata }, data => {
-            handleClick();
-            setImageUrl(null)
-            setScreenshortUrl(null)
-            document.querySelector('#mainForm').reset()
-        }, (res) => console.log(res))
+
+        try {
+            apiFech.postProject('http://localhost:2001/projects', { body: formdata }, data => {
+                console.log('data')
+                handleClick();
+                setImageUrl(null)
+                setScreenshortUrl(null)
+                document.querySelector('#mainForm').reset()
+            }, (res) => console.log(res))
+        } catch (error) {
+            console.error(error)
+        }
     }
- 
+
 
 
 
@@ -224,7 +230,7 @@ const PMNewProjects = ({ container }) => {
                     onChange={(e) => getValue(e, e.target.value)}
 
                 />
-                <Button sx={{ letterSpacing: '3px', color: 'white', backgroundColor: '#7B1FA2', '&:hover': { color:'#ED6C2A'} }} style={{ padding: '8px 20px', borderRadius: '5px' }} type="submit" value="Sumbit" >Sumbit</Button>
+                <Button sx={{ letterSpacing: '3px', color: 'white', backgroundColor: '#7B1FA2', '&:hover': { color: '#ED6C2A' } }} style={{ padding: '8px 20px', borderRadius: '5px' }} type="submit" value="Sumbit" >Sumbit</Button>
                 <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                         Create project successfully!

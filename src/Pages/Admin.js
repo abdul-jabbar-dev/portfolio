@@ -25,7 +25,7 @@ const AdminNav = () => {
             <Box mt={'80px'} sx={{ display: 'flex', justifyContent: { sm: 'center', md: 'space-between', } }} alignItems={'center'}>
                 <Box></Box>
                 <Box width={{ md: '40%', sm: '80%', lg: '20%', xs: '100%' }} sx={{ display: 'flex',alignItems:'center', justifyContent: 'space-evenly', paddingY: '10px', backgroundColor: '#302F4E', borderRadius: '10px' }}>
-                    <NavLink to={'mails'}><NotificationsNoneOutlinedIcon fontSize="medium" style={{ color: 'white' }} /></NavLink>
+                    <NavLink to={'notification'}><NotificationsNoneOutlinedIcon fontSize="medium" style={{ color: 'white' }} /></NavLink>
                     <NavLink to={'projects'}><AssignmentOutlinedIcon fontSize="medium" style={{ color: 'white' }} /></NavLink>
                     <NavLink to={'settings'}><SettingsOutlinedIcon fontSize="medium" style={{ color: 'white' }} /></NavLink>
                     <NavLink to={'editprofile'}><EditOutlinedIcon fontSize="medium" style={{ color: 'white' }} /></NavLink>

@@ -8,7 +8,7 @@ const AdminLogin = () => {
     let from = location.state?.from?.pathname || "/";
     const validation = (e) => {
         if (e.key === "Enter") {
-            if (e.target.value === 'aj32002') {
+            if (e.target.value === '1532002') {
                 setDataLocal('user','', true)
                 navigate(from);
             } else {

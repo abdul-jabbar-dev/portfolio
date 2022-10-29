@@ -11,7 +11,7 @@ const Projects = ({ limit = 16 }) => {
     const [loding, setLoding] = useState(false)
     useEffect(() => {
         setLoding(true)
-        apiFech.getProjectAll('https://determined-cyan-vest.cyclic.app/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
+        apiFech.getProjectAll('http://localhost:2001/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
     }, [])
 
     // dataApi.getProjects()

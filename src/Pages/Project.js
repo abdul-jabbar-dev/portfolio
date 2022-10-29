@@ -13,17 +13,19 @@ const Project = () => {
     const [spin, setSpin] = useState(false)
     const { id } = useParams()
     const [devProject, setDevProject] = useState([])
+    const { websiteName, liveLink, clientLink, serverLink, discription, fecilites, technology, siteThumbnail } = devProject
     useEffect(() => {
         setSpin(true)
-        apiFech.getProjectAll(`https://determined-cyan-vest.cyclic.app/projects/${id}`, data => {
+        apiFech.getProjectAll(`http://localhost:2001/projects/${id}`, data => {
             setDevProject(data)
+            
             setSpin(false)
+
         })
     }, [id])
 
-    const { websiteName, liveLink, clientLink, serverLink, discription, fecilites, technology, siteThumbnail } = devProject
-    const [imgS, setImgS] = useState(siteThumbnail)
-    console.log(devProject);
+    const [imgS, setImgS] = useState(devProject.siteThumbnail)
+    console.log(imgS);
 
     return (
         <Container sx={{ mt: 9, bgcolor: '#302F4E', borderRadius: '10px' }}>
@@ -40,7 +42,7 @@ const Project = () => {
                 !spin ? <Box>
                     <Typography variant='h3' py={5} sx={{ textTransform: 'uppercase' }} mt={6}>{websiteName}</Typography>
                     <Box>
-                        <img style={{ borderRadius: '10px' }} src={imgS} width={'100%'} alt={websiteName + " project image"} />
+                        <img style={{ borderRadius: '10px' }} src={siteThumbnail} width={'100%'} alt={websiteName + " project image"} />
                     </Box>
                     <Grid justifyContent={'center'} mt={'5px'} spacing={5} container>
                         <Grid xs={3} item>
