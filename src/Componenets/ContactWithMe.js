@@ -50,7 +50,7 @@ const ContactWithMe = () => {
                             fullWidth
                             onChange={e => setContact({ ...contact, name: e.target.value })}
                             id="name"
-                            sx={{ 'input': { color: 'lightGray !important', backgroundColor: '#353353 !important', borderRadius: '5px' } }}
+                            sx={{ 'input': {  color: 'lightGray !important', backgroundColor: '#353353 !important', borderRadius: '5px' },'label':{color:'lightGray'} }}
                             // inputProps={{ style: { backgroundColor: '#353353',borderRadius:'5px' } }}
                             type="name"
                             label='Enter Your Name'
@@ -64,7 +64,7 @@ const ContactWithMe = () => {
 
                         <TextField
 
-                            sx={{ my: 3, 'input': { color: 'lightGray !important', backgroundColor: '#353353 !important', borderRadius: '5px' } }}
+                            sx={{ my: 3, 'input': { color: 'lightGray !important', backgroundColor: '#353353 !important', borderRadius: '5px' },'label':{color:'lightGray'} }}
                             fullWidth
                             required
                             id="email"
@@ -84,7 +84,7 @@ const ContactWithMe = () => {
                         <TextField
                             fullWidth
                             required
-                            sx={{ ' div': { color: '#fff !important', backgroundColor: '#353353 !important', borderRadius: '5px' } }}
+                            sx={{ ' div': { color: '#fff !important', backgroundColor: '#353353 !important', borderRadius: '5px' },'label':{color:'lightGray'} }}
                             multiline
                             onChange={e => setContact({ ...contact, message: e.target.value })}
                             rows={4}

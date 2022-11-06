@@ -15,7 +15,7 @@ const Navigator = () => {
     return (
         <Box minWidth={{ xs: 320, sm: 400, md: 500 }} className='d' sx={{ zIndex: 9999, position: 'fixed' }}>
             <BottomNavigation
-                sx={{ bgcolor: '#302F4E', borderRadius: 3 }}
+                sx={{ bgcolor: '#302F4E', borderRadius: 3, alignItems: "center" }}
                 value={value}
 
                 onChange={(event, newValue) => {

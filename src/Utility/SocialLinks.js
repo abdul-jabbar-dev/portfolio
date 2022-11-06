@@ -10,7 +10,10 @@ import { IconButton } from '@mui/material';
 const SocialLinks = () => {
     const [links, setLinks] = useState({})
     useEffect(() => {
-        apiFech.getProjectAll('http://localhost:2001/sociallinks', async (res) => await setLinks(res))
+        apiFech.getProjectAll('http://localhost:2001/sociallinks', async (res) => {
+
+            await setLinks(res.filter(perLinks => perLinks.priority === 'active'))
+        })
     }, []);
 
 

@@ -1,6 +1,8 @@
 import { Container, Grid, Skeleton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import './Projects.css'
+import { Button, Popover } from "@mui/material";
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import { Link } from 'react-router-dom';
 import apiFech from '../api/Fech';
 import HelmetMeta from './Custom Meta/HelmetMeta';
@@ -33,13 +35,12 @@ const Projects = ({ limit = 16 }) => {
                     devProjects.slice(0, limit).map((e, index) =>
                         <Grid key={e._id} item xs={12} sm={6} md={4}>
                             <div className="grid">
-                                <figure className="effect-sadie">
+                                <figure className="effect-sadie pointer" >
                                     {<img src={e.siteThumbnail} alt={e.websiteName} />}
                                     <figcaption>
-                                        <h2>{e.websiteName?.split(' ')[0]} <span>{e.websiteName?.split(' ')[1]}</span> </h2>
-                                        <p>{e.discription}</p>
-                                        <a href={e.link}>View more</a>
-                                        <Link to={`/projects/${e._id}`}></Link>
+                                        <Typography color={'lightgray'}>Click here</Typography>
+                                        <a target='_blank' rel="noreferrer" href={e.liveLink}>View more</a>
+                                        {/* <Link hrefLang={e.liveLink}></Link> */}
                                     </figcaption>
                                 </figure>
                             </div>
