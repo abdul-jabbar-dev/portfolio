@@ -1,12 +1,16 @@
 import { Avatar, Box, Container, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 import apiFech from '../../../api/Fech';
 
 const MailsMaintain = () => {
 
     const [notifications, setNotifications] = useState([]);
 
-
+    const del_notification = (link) => {
+        const confirmDel = window.confirm("If you want to delete")
+        confirmDel && apiFech.rmProject(`http://localhost:2001/notification/${link._id}`, {}, (res => res.deletedCount === 1 ? alert("Delete successfully") : alert("Delete unsuccessfully")))
+    }
     useEffect(() => {
         apiFech.getProjectAll('http://localhost:2001/notification', (res => setNotifications(res)))
     }, [])
@@ -40,7 +44,7 @@ const MailsMaintain = () => {
                                         color="lightGray"
                                     >
                                         {" / " + new Date(Date(item.postDate)).toUTCString()}
-                                    </Typography>
+                                    </Typography><DeleteIcon fontSize='.5rem' sx={{ transition: 'all .5s', ':hover': { borderRadius: '50px', cursor: 'pointer', color: 'red', fontSize: '1.3rem' } }} onClick={e => del_notification(item)}></DeleteIcon>
                                 </React.Fragment>
                             }
                         />

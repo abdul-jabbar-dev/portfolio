@@ -1,15 +1,27 @@
 import { Avatar, Box, Button, Stack, Typography } from '@mui/material';
 import developerImg from './Avatar.png'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css'
 import TextMotion from './TextMotion';
+
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import SocialLinks from '../Utility/SocialLinks';
+import apiFech from '../api/Fech';
 const Developer = () => {
+    const [cv, setCv] = useState({});
+
+    useEffect(() => {
+
+        apiFech.getProjectAll('http://localhost:2001/sociallinks', (res) => {
+            setCv(res.find(data => data.cv))
+        })
+    }, [])
+
     const onDownload = () => {
         const link = document.createElement("a");
         link.download = `download.txt`;
-        link.href = "https://drive.google.com/u/0/uc?id=1prUTljT-Jr4YzOGVQFfN-KrL18jzlUBy&export=download" || "https://drive.google.com/file/d/1prUTljT-Jr4YzOGVQFfN-KrL18jzlUBy";
+        link.href = cv.cv;
+        link.setAttribute('target', '_blank')
         link.click();
     };
     return (<>

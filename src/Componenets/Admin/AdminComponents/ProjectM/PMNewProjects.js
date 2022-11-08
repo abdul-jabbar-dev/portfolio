@@ -1,25 +1,20 @@
 import { Alert, Box, Button, Fab, Portal, Snackbar, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import ClearIcon from '@mui/icons-material/Clear';
-import AddIcon from '@mui/icons-material/Add';
 import apiFech from '../../../../api/Fech';
 
 const PMNewProjects = ({ container }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
     const [open, setOpen] = useState(false);
-    //site screenshot
-    const [selectedScreenshort, setSelectedScreenshort] = useState(null);
-    const [screenshortUrl, setScreenshortUrl] = useState(null);
+    let fileArray = []
+    
     const handleClick = () => {
         setOpen(true);
     };
-    //user data in input
 
     const [websiteInfo, setWebsiteInfo] = useState({
         siteThumbnail: {},
-        siteScreenShort: {},
         websiteName: '',
         liveLink: '',
         clientLink: '',
@@ -29,22 +24,12 @@ const PMNewProjects = ({ container }) => {
         technology: ''
     })
 
-    const fileArray = [];
     useEffect(() => {
-        if (selectedScreenshort) {
-            let temp = []
-            for (const key in selectedScreenshort) {
-                if (Object.hasOwnProperty.call(selectedScreenshort, key)) {
-                    const element = selectedScreenshort[key];
-                    temp.push(element);
-                }
-            }
-            setScreenshortUrl(temp);
-        }
+
         if (selectedImage) {
             setImageUrl(URL.createObjectURL(selectedImage));
         }
-    }, [selectedScreenshort, selectedImage]);
+    }, [selectedImage]);
 
 
     const getValue = (e, value) => {
@@ -55,6 +40,16 @@ const PMNewProjects = ({ container }) => {
     }
     const postData = (e) => {
         e.preventDefault();
+        if (selectedImage) {
+            let fileData = new Blob([websiteInfo.siteThumbnail]);
+            let reader = new FileReader();
+            reader.readAsArrayBuffer(fileData);
+            reader.onload = () => {
+                let arrayBuffer = reader.result
+                let bytes = new Uint8Array(arrayBuffer);
+                fileArray.push(bytes.buffer);
+            }
+        }
         let formdata = new FormData();
         formdata.append('siteThumbnail', websiteInfo.siteThumbnail, websiteInfo.siteThumbnail.name)
         formdata.append('websiteName', websiteInfo.websiteName)
@@ -64,28 +59,11 @@ const PMNewProjects = ({ container }) => {
         formdata.append('discription', websiteInfo.discription)
         formdata.append('fecilites', websiteInfo.fecilites)
         formdata.append('technology', websiteInfo.technology)
-        if (websiteInfo.siteScreenShort) {
-            for (let key of websiteInfo.siteScreenShort) {
-                let fileData = new Blob([websiteInfo.siteScreenShort[key]]);
-                let reader = new FileReader();
-                reader.readAsArrayBuffer(fileData);
-                reader.onload = () => {
-                    let arrayBuffer = reader.result
-                    let bytes = new Uint8Array(arrayBuffer);
-                    fileArray.push(bytes.buffer);
-                }
-            }
-            for (let i = 0; i < websiteInfo.siteScreenShort.length; i++) {
-                formdata.append("siteScreenShort" + [i], websiteInfo.siteScreenShort[i])
-            };
-        }
-
         try {
             apiFech.postProject('http://localhost:2001/projects', { body: formdata }, data => {
                 console.log('data')
                 handleClick();
                 setImageUrl(null)
-                setScreenshortUrl(null)
                 document.querySelector('#mainForm').reset()
             }, (res) => console.log(res))
         } catch (error) {
@@ -93,16 +71,13 @@ const PMNewProjects = ({ container }) => {
         }
     }
 
-
-
-
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
+
     return (
         <Portal container={container.current} >
             <Box
@@ -134,32 +109,7 @@ const PMNewProjects = ({ container }) => {
                         getValue(e, e.target.files[0])
                     }} style={{ display: 'none' }} type="file" name="siteThumbnail" id="siteThumbnail" />
 
-                    <Box>
-                        <Fab size="small" color="secondary" aria-label="add" onClick={e => document.querySelector('#siteScreenShort').click()}>
-                            <AddIcon />
-                            <input multiple onChange={e => {
-                                setSelectedScreenshort(e.target.files)
-                                getValue(e, e.target.files)
-                            }}
 
-                                style={{ display: 'none' }} type="file" name="siteScreenShort" id="siteScreenShort" />
-                        </Fab>
-                        <Box>
-
-                            <ul style={{ listStyle: 'none', display: 'flex', columnGap: '10px' }}>
-
-                                {
-                                    screenshortUrl?.map((value, index, arry) => {
-                                        return <li key={index}>
-                                            {value.name}
-                                            <ClearIcon fontSize='small' onClick={e => setScreenshortUrl(arry?.filter((value, i) => index !== i))}></ClearIcon>
-                                        </li>
-                                    })
-                                }
-
-                            </ul>
-                        </Box>
-                    </Box>
                 </Box>
                 <br />
                 <TextField

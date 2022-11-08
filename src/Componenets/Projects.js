@@ -1,13 +1,9 @@
 import { Container, Grid, Skeleton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import './Projects.css'
-import { Button, Popover } from "@mui/material";
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import { Link } from 'react-router-dom';
+
 import apiFech from '../api/Fech';
 import HelmetMeta from './Custom Meta/HelmetMeta';
-// import contextApi from '../Context/ContextApi';
-// import dataApi from '../Context/ContextApi';
 const Projects = ({ limit = 16 }) => {
     const [devProjects, setDevProjects] = useState([])
     const [loding, setLoding] = useState(false)
@@ -16,7 +12,6 @@ const Projects = ({ limit = 16 }) => {
         apiFech.getProjectAll('http://localhost:2001/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
     }, [])
 
-    // dataApi.getProjects()
     return (
         <Container sx={{ my: 10 }}>
             {
