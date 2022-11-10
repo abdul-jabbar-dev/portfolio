@@ -6,6 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 const EditProfile = () => {
+
+    const [cvId, setCvId] = useState('')
     const [socialLinks, setsocialLinks] = useState([])
     const [newSocialLinks, setNewSocialLinks] = useState({})
     const [sending, setSending] = useState(false)
@@ -19,16 +21,18 @@ const EditProfile = () => {
         setGetLinkName(event.target.value);
     };
     useEffect(() => {
-        apiFech.getProjectAll('http://localhost:2001/sociallinks', (res => {
+        apiFech.getProjectAll('http://api.abduljabbar.xyz/sociallinks', (res => {
             setsocialLinks(res.filter(cv => !cv.cv))
         }))
     }, [sending])
     useEffect(() => {
-        apiFech.getProjectAll('http://localhost:2001/sociallinks', (res => {
+        apiFech.getProjectAll('http://api.abduljabbar.xyz/sociallinks', (res => {
             let getUrl = res.find(data => data.cv)
-            setCv_url(prev => ({ _id: getUrl._id, cv: getUrl.cv, new_cv: prev.new_cv }))
+            console.log(res)
+            setCvId(getUrl._id)
+            setCv_url(prev => ({ _id: getUrl?._id, cv: getUrl?.cv, new_cv: prev?.new_cv }))
         }))
-    }, [cv_url])
+    }, [])
 
     const send_link = () => {
         if (getLinkName !== 'other') {
@@ -36,15 +40,15 @@ const EditProfile = () => {
         }
         if (newSocialLinks.name && newSocialLinks.url && newSocialLinks.priority) {
 
-            apiFech.postProject('http://localhost:2001/sociallinks', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(newSocialLinks) }, (res => console.log(res)), '', () => setSending(true))
+            apiFech.postProject('http://api.abduljabbar.xyz/sociallinks', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(newSocialLinks) }, (res => console.log(res)), '', () => setSending(true))
         }
     }
     const deactive_link = (link) => {
-        apiFech.updateProject(`http://localhost:2001/sociallinks/${link._id}`, { headers: { 'content-type': 'application/json', }, body: JSON.stringify({ update: "deactivate" }) }, (res => res.modifiedCount === 1 ? alert("Deactivate successfully") : alert("Deactivate unsuccessfully")))
+        apiFech.updateProject(`http://api.abduljabbar.xyz/sociallinks/${link._id}`, { headers: { 'content-type': 'application/json', }, body: JSON.stringify({ update: "deactivate" }) }, (res => res.modifiedCount === 1 ? alert("Deactivate successfully") : alert("Deactivate unsuccessfully")))
     }
     const del_link = (link) => {
         const confirmDel = window.confirm("If you want to delete")
-        confirmDel && apiFech.rmProject(`http://localhost:2001/sociallinks/${link._id}`, {}, (res => res.deletedCount === 1 ? alert("Delete successfully") : alert("Delete unsuccessfully")))
+        confirmDel && apiFech.rmProject(`http://api.abduljabbar.xyz/sociallinks/${link._id}`, {}, (res => res.deletedCount === 1 ? alert("Delete successfully") : alert("Delete unsuccessfully")))
     }
 
     const update_link = (link) => {
@@ -56,14 +60,12 @@ const EditProfile = () => {
         }
         if (updatedLink.name && updatedLink.url) {
 
-            apiFech.updateProject(`http://localhost:2001/sociallinks/${link._id}`, { headers: { 'content-type': 'application/json', }, body: JSON.stringify(updatedLink) }, (res => res.modifiedCount === 1 ? alert("Update successfully") : alert("Update unsuccessfully")))
+            apiFech.updateProject(`http://api.abduljabbar.xyz/sociallinks/${link._id}`, { headers: { 'content-type': 'application/json', }, body: JSON.stringify(updatedLink) }, (res => res.modifiedCount === 1 ? alert("Update successfully") : alert("Update unsuccessfully")))
         }
     }
     const send_cv_url = () => {
-        console.log(cv_url)
         if (cv_url.new_cv) {
-
-            cv_url?._id && apiFech.updateProject(`http://localhost:2001/sociallinks/${cv_url?._id}`, { headers: { 'content-type': 'application/json', }, body: JSON.stringify(cv_url) }, (res =>res.modifiedCount === 1 ? alert("Cv update successfully") : alert("cv update unsuccessfully")), '', () => setSending(true))
+            apiFech.updateProject(`http://api.abduljabbar.xyz/sociallinks/${cvId}`, { headers: { 'content-type': 'application/json', }, body: JSON.stringify(cv_url) }, (res => res.modifiedCount === 1 ? alert("Cv update successfully") : alert("cv update unsuccessfully")), '', () => setSending(true))
         }
     }
     sending && setTimeout(() => {

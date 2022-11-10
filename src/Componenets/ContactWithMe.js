@@ -25,7 +25,7 @@ const ContactWithMe = () => {
 
     const sendDataBase = (e) => {
         if (contact.email && contact.name && contact.message) {
-            apiFech.postProject('http://localhost:2001/notification', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(contact) }, res => {
+            apiFech.postProject('http://api.abduljabbar.xyz/notification', { headers: { 'content-type': 'application/json', }, body: JSON.stringify(contact) }, res => {
 
             })
         }

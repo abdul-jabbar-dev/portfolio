@@ -17,7 +17,7 @@ const PMAllProjects = ({ container }) => {
 
     useEffect(() => {
         setLoding(true)
-        apiFech.getProjectAll('http://localhost:2001/projects', data => setProjects(data), null, (res) => setLoding(false))
+        apiFech.getProjectAll('http://api.abduljabbar.xyz/projects', data => setProjects(data), null, (res) => setLoding(false))
         setSencing('')
 
     }, [sencing])

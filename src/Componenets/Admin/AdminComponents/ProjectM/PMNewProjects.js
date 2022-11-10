@@ -60,7 +60,7 @@ const PMNewProjects = ({ container }) => {
         formdata.append('fecilites', websiteInfo.fecilites)
         formdata.append('technology', websiteInfo.technology)
         try {
-            apiFech.postProject('http://localhost:2001/projects', { body: formdata }, data => {
+            apiFech.postProject('http://api.abduljabbar.xyz/projects', { body: formdata }, data => {
                 console.log('data')
                 handleClick();
                 setImageUrl(null)

@@ -9,10 +9,10 @@ const MailsMaintain = () => {
 
     const del_notification = (link) => {
         const confirmDel = window.confirm("If you want to delete")
-        confirmDel && apiFech.rmProject(`http://localhost:2001/notification/${link._id}`, {}, (res => res.deletedCount === 1 ? alert("Delete successfully") : alert("Delete unsuccessfully")))
+        confirmDel && apiFech.rmProject(`http://api.abduljabbar.xyz/notification/${link._id}`, {}, (res => res.deletedCount === 1 ? alert("Delete successfully") : alert("Delete unsuccessfully")))
     }
     useEffect(() => {
-        apiFech.getProjectAll('http://localhost:2001/notification', (res => setNotifications(res)))
+        apiFech.getProjectAll('http://api.abduljabbar.xyz/notification', (res => setNotifications(res)))
     }, [])
     return (
         <Container>

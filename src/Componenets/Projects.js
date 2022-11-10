@@ -9,7 +9,7 @@ const Projects = ({ limit = 16 }) => {
     const [loding, setLoding] = useState(false)
     useEffect(() => {
         setLoding(true)
-        apiFech.getProjectAll('http://localhost:2001/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
+        apiFech.getProjectAll('http://api.abduljabbar.xyz/projects', (res) => setDevProjects(res), null, (finaly) => setLoding(false))
     }, [])
 
     return (

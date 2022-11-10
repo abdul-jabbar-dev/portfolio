@@ -12,7 +12,7 @@ const Developer = () => {
 
     useEffect(() => {
 
-        apiFech.getProjectAll('http://localhost:2001/sociallinks', (res) => {
+        apiFech.getProjectAll('http://api.abduljabbar.xyz/sociallinks', (res) => {
             setCv(res.find(data => data.cv))
         })
     }, [])

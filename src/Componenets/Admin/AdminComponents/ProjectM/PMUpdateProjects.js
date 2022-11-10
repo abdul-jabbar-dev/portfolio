@@ -31,7 +31,7 @@ const ModalEdit = ({ modalOpen, handleClose, projects, removeProject }) => {
         }
 
 
-        apiFech.updateProject(`http://localhost:2001/projects/${projects._id}`, { body: formData }, (res) => console.log(res))
+        apiFech.updateProject(`http://api.abduljabbar.xyz/projects/${projects._id}`, { body: formData }, (res) => console.log(res))
     }
     const style = {
         position: 'absolute',
@@ -181,7 +181,7 @@ const PMUpdateProjects = ({ projects, response, }) => {
     const handleClose = () => setModalOpen(false);
 
     const removeProject = () => {
-        apiFech.rmProject('http://localhost:2001/projects/' + projects._id, null, res => {
+        apiFech.rmProject('http://api.abduljabbar.xyz/projects/' + projects._id, null, res => {
             if (res.deletedCount) {
                 response('delete')
                 handleClose()

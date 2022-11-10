@@ -16,7 +16,7 @@ const Project = () => {
     const { websiteName, liveLink, clientLink, serverLink, discription, fecilites, technology, siteThumbnail } = devProject
     useEffect(() => {
         setSpin(true)
-        apiFech.getProjectAll(`http://localhost:2001/projects/${id}`, data => {
+        apiFech.getProjectAll(`http://api.abduljabbar.xyz/projects/${id}`, data => {
             setDevProject(data)
             
             setSpin(false)
