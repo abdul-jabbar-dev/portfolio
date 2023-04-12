@@ -6,30 +6,40 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
 import TimelineIcon from '@mui/icons-material/Timeline';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { NavLink } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 
 const Navigator = () => {
     const [value, setValue] = useState(0);
+    const navs = [
+        {
+            url: '/home',
+            title: 'Home',
+            icon: <HomeIcon />
+        }, {
+            url: '/projects',
+            title: 'Project',
+            icon: <TimelineIcon />
+        }, {
+            url: '/aboutme',
+            title: 'About me',
+            icon: <LocalLibraryIcon />
+        },
+    ]
 
     return (
-        <Box minWidth={{ xs: 320, sm: 400, md: 500 }} className='d' sx={{ zIndex: 9999, position: 'fixed' }}>
-            <BottomNavigation
-                sx={{ bgcolor: '#302F4E', borderRadius: 3 }}
-                value={value}
+        <Box minWidth={{ xs: 320, sm: 400, md: 500 }} className='d' sx={{ zIndex: 9999, position: 'fixed'}}>
 
-                onChange={(event, newValue) => {
-                    console.log(event);
-                    setValue(newValue);
-                }}
-            >
-                <Tooltip title="Home"><NavLink to={'/home'}> <BottomNavigationAction sx={{ color: '#fff' }} icon={<HomeIcon />} /> </NavLink></Tooltip>
-                <Tooltip title="Project"><NavLink to={'/projects'}> <BottomNavigationAction sx={{ color: '#fff' }} icon={<TimelineIcon />} /></NavLink></Tooltip>
-                <Tooltip title="About me"><NavLink to={'/aboutme'}> <BottomNavigationAction sx={{ color: '#fff' }} icon={<LocalLibraryIcon />} /></NavLink></Tooltip>
-                {/* <Tooltip  title="Blogs"><NavLink to={'/blogs'}>  <BottomNavigationAction sx={{ color: '#fff' }} icon={<NewspaperIcon />} /></NavLink></Tooltip> */}
+            {
+                navs?.map(nav => <Tooltip key={nav} title={nav.title}><NavLink to={nav.url} style={{padding:'10px 0 '}}>
 
-            </BottomNavigation>
+                    <BottomNavigationAction sx={{ color: '#fff' }} icon={nav.icon} />
+
+                </NavLink>
+                </Tooltip>)
+            }
+            {/* <Tooltip  title="Blogs"><NavLink to={'/blogs'}>  <BottomNavigationAction sx={{ color: '#fff' }} icon={<NewspaperIcon />} /></NavLink></Tooltip> */}
+
         </Box>
     );
 };

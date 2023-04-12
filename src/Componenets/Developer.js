@@ -1,32 +1,39 @@
-import { Avatar, Box, Button, IconButton, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Button, Stack, Typography } from '@mui/material';
 import developerImg from './Avatar.png'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css'
 import TextMotion from './TextMotion';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'; import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
+
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import SocialLinks from '../Utility/SocialLinks';
+import apiFech from '../api/Fech';
 const Developer = () => {
+    const [cv, setCv] = useState({});
+
+    useEffect(() => {
+
+        apiFech.getProjectAll('https://determined-cyan-vest.cyclic.app/sociallinks', (res) => {
+            setCv(res.find(data => data.cv))
+        })
+    }, [])
+
     const onDownload = () => {
         const link = document.createElement("a");
         link.download = `download.txt`;
-        link.href = "https://drive.google.com/u/2/uc?id=1BkobdN6Po1dKR6FGARzhszyVZIZ8qG_i&export=download";
+        link.href = cv.cv;
+        link.setAttribute('target', '_blank')
         link.click();
     };
-
     return (<>
-        <Box textAlign={'center'} height={"100vh"}  display={'flex'} justifyContent={'center'} alignItems={'center'}>
+        <Box textAlign={'center'} height={"100vh"} display={'flex'} justifyContent={'center'} alignItems={'center'}>
             <Box display={'flex'} gap={'50px'} sx={{ flexDirection: 'column', alignContent: 'center', alignItems: 'center' }}>
                 <Avatar
-                    alt="Remy Sharp"
+                    alt="Abdul jabbar avatar"
                     src={developerImg}
-
                     sx={{ width: 150, height: 150, }}
                 />
                 <Box textAlign={'center'}>
-                    <Typography fontWeight={'bold'} variant='h3'sx={{textTransform:'uppercase',letterSpacing:'6px'}} >Abdul jabbar</Typography>
+                    <Typography fontWeight={'bold'} variant='h3' sx={{ textTransform: 'uppercase', letterSpacing: '6px' }} >Abdul jabbar</Typography>
                     <br />
                     <TextMotion></TextMotion><br />
                     <Box mx={'auto'} sx={{
@@ -35,25 +42,11 @@ const Developer = () => {
                         justifyContent: 'space-evenly',
                     }}>
                         <Stack direction="row" spacing={1}>
-                            <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
-                                <FacebookOutlinedIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://github.com/abduljabbar15" aria-label="fingerprint">
-                                <GitHubIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://www.instagram.com/abdul_jabbar153/" aria-label="fingerprint">
-                                <InstagramIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://www.linkedin.com/in/abduljabbar1532002/" aria-label="fingerprint">
-                                <LinkedInIcon htmlColor='white' />
-                            </IconButton>
-                            <IconButton target={'_blank'} href="https://www.facebook.com/abduljabbar3200/" aria-label="fingerprint">
-                                <TwitterIcon htmlColor='white' />
-                            </IconButton>
+                            <SocialLinks></SocialLinks>
                         </Stack>
 
                     </Box><br /><br />
-                    <Button className='btn' color='secondary' variant='secondary' sx={{ letterSpacing:'3px',borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} startIcon={<ArrowCircleDownIcon />} onClick={onDownload}>Download cv</Button>
+                    <Button target={'_blank'} className='btn' color='secondary' variant='secondary' sx={{ letterSpacing: '3px', borderRadius: '20px', py: 1.3, backgroundColor: '#FF4C60' }} startIcon={<ArrowCircleDownIcon />} onClick={onDownload}>Download cv</Button>
                 </Box>
             </Box>
             <div className="scrollContainer">
@@ -63,8 +56,8 @@ const Developer = () => {
                 </div>
             </div>
         </Box>
-        
-        </>
+
+    </>
     );
 };
 

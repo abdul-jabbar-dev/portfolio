@@ -113,3 +113,7 @@
 
     transform: translate(-50%, -50%);
 }
+
+.active{
+    border-bottom: 2px solid rgb(122, 65, 192);  
+}
